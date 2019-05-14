@@ -104,12 +104,12 @@
 <meta property="og:site_name" content="梁叔叔技术博客">
 <meta property="og:description" content="RocketMQ消息中间件需要解决的问题1、发布订阅发布订阅是消息中间件最基础的功能。 2、消息优先级3、消息顺序4、消息过滤器5、消息持久化消息中间件通常采用的几种持久化方式： 持久化到数据库，例如Mysql。持久化到KV存储，例如levelDB、伯克利DB等KV存储系统。文件记录形式持久化，例如Kafka，RocketMQ对内存数据做一个持久化镜像，例如beanstalkd，VisiNoti">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12619159-a858d38e0b38c406.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp">
-<meta property="og:updated_time" content="2019-05-13T15:00:00.000Z">
+<meta property="og:image" content="https://static.oschina.net/uploads/space/2016/1217/180742_VCL8_942558.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp">
+<meta property="og:updated_time" content="2019-05-13T17:19:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RocketMQ 入门概述">
 <meta name="twitter:description" content="RocketMQ消息中间件需要解决的问题1、发布订阅发布订阅是消息中间件最基础的功能。 2、消息优先级3、消息顺序4、消息过滤器5、消息持久化消息中间件通常采用的几种持久化方式： 持久化到数据库，例如Mysql。持久化到KV存储，例如levelDB、伯克利DB等KV存储系统。文件记录形式持久化，例如Kafka，RocketMQ对内存数据做一个持久化镜像，例如beanstalkd，VisiNoti">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/12619159-a858d38e0b38c406.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp">
+<meta name="twitter:image" content="https://static.oschina.net/uploads/space/2016/1217/180742_VCL8_942558.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp">
 
 
 
@@ -369,12 +369,24 @@
                 
               
 
-              <time title="Created: 2019-05-13 15:10:06 / Modified: 23:00:00" itemprop="dateCreated datePublished" datetime="2019-05-13T15:10:06+08:00">2019-05-13</time>
+              <time title="Created: 2019-05-13 15:10:06" itemprop="dateCreated datePublished" datetime="2019-05-13T15:10:06+08:00">2019-05-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-14 01:19:19" itemprop="dateModified" datetime="2019-05-14T01:19:19+08:00">2019-05-14</time>
               
             
           </span>
@@ -438,7 +450,10 @@
 <p>消息堆积在内存Buffer，一旦超过内存Buffer，可以根据一定的丢弃策略来丢弃消息，如CORBA Notification规范中描述。适合能容忍丢弃消息的业务，这种情况消息的堆积能力主要在于内存Buffer大小，而且消息堆积后，性能下降不会太大，因为内存中数据多少对于对外提供的访问能力影响有限。<br>消息堆积到持久化存储系统中，例如DB，KV存储，文件记录形式。 当消息不能在内存Cache命中时，要不可避免的访问磁盘，会产生大量读IO，读IO的吞吐量直接决定了消息堆积后的访问能力。<br>评估消息堆积能力主要有以下四点：</p>
 <p>消息能堆积多少条，多少字节？即消息的堆积容量。<br>消息堆积后，发消息的吞吐量大小，是否会受堆积影响？<br>消息堆积后，正常消费的Consumer是否会受影响？<br>消息堆积后，访问堆积在磁盘的消息时，吞吐量有多大？</p>
 <h3 id="10、消息回溯"><a href="#10、消息回溯" class="headerlink" title="10、消息回溯"></a>10、消息回溯</h3><p>回溯消费是指Consumer已经消费成功的消息，由于业务上需求需要重新消费，要支持此功能，Broker在向Consumer投递成功消息后，消息仍然需要保留。并且重新消费一般是按照时间维度，例如由于Consumer系统故障，恢复后需要重新消费1小时前的数据，那么Broker要提供一种机制，可以按照时间维度来回退消费进度。<br>RocketMQ支持按照时间回溯消费，时间维度精确到毫秒，可以向前回溯，也可以向后回溯</p>
-<h2 id="集群结构"><a href="#集群结构" class="headerlink" title="集群结构"></a>集群结构</h2><p><img src="https://upload-images.jianshu.io/upload_images/12619159-a858d38e0b38c406.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp" alt="enter image description here"></p>
+<h2 id="集群结构"><a href="#集群结构" class="headerlink" title="集群结构"></a>集群结构</h2><p><img src="https://static.oschina.net/uploads/space/2016/1217/180742_VCL8_942558.png?imageMogr2/auto-orient/strip|imageView2/2/w/1000/format/webp" alt="enter image description here"></p>
+<p>结合部署结构图，描述集群工作流程：<br>1，启动Namesrv，Namesrv起来后监听端口，等待Broker、Produer、Consumer连上来，相当于一个路由控制中心。<br>2，Broker启动，跟所有的Namesrv保持长连接，定时发送心跳包。心跳包中包含当前Broker信息(IP+端口等)以及存储所有topic信息。注册成功后，namesrv集群中就有Topic跟Broker的映射关系。<br>3，收发消息前，先创建topic，创建topic时需要指定该topic要存储在哪些Broker上。也可以在发送消息时自动创建Topic。<br>4，Producer发送消息，启动时先跟Namesrv集群中的其中一台建立长连接，并从Namesrv中获取当前发送的Topic存在哪些Broker上，然后跟对应的Broker建长连接，直接向Broker发消息。<br>5，Consumer跟Producer类似。跟其中一台Namesrv建立长连接，获取当前订阅Topic存在哪些Broker，然后直接跟Broker建立连接通道，开始消费消息。</p>
+<h3 id="Nameserver"><a href="#Nameserver" class="headerlink" title="Nameserver"></a>Nameserver</h3><p>启动Namesrv，Namesrv起来后监听端口，等待Broker、Produer、Consumer连上来，相当于一个路由控制中心。</p>
+<h3 id="Producer"><a href="#Producer" class="headerlink" title="Producer"></a>Producer</h3><h3 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h3><h3 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h3><p>一主多从架构</p>
 
       
     </div>
@@ -644,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMQ"><span class="nav-text">RocketMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息中间件需要解决的问题"><span class="nav-text">消息中间件需要解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、发布订阅"><span class="nav-text">1、发布订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、消息优先级"><span class="nav-text">2、消息优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、消息顺序"><span class="nav-text">3、消息顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、消息过滤器"><span class="nav-text">4、消息过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、消息持久化"><span class="nav-text">5、消息持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、消息可靠性"><span class="nav-text">6、消息可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、至少一次投递"><span class="nav-text">7、至少一次投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、至多一次投递"><span class="nav-text">8、至多一次投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、消息重试"><span class="nav-text">8、消息重试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、消息堆积"><span class="nav-text">9、消息堆积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、消息回溯"><span class="nav-text">10、消息回溯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群结构"><span class="nav-text">集群结构</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMQ"><span class="nav-text">RocketMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息中间件需要解决的问题"><span class="nav-text">消息中间件需要解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、发布订阅"><span class="nav-text">1、发布订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、消息优先级"><span class="nav-text">2、消息优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、消息顺序"><span class="nav-text">3、消息顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、消息过滤器"><span class="nav-text">4、消息过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、消息持久化"><span class="nav-text">5、消息持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、消息可靠性"><span class="nav-text">6、消息可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、至少一次投递"><span class="nav-text">7、至少一次投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、至多一次投递"><span class="nav-text">8、至多一次投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、消息重试"><span class="nav-text">8、消息重试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、消息堆积"><span class="nav-text">9、消息堆积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、消息回溯"><span class="nav-text">10、消息回溯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群结构"><span class="nav-text">集群结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nameserver"><span class="nav-text">Nameserver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Producer"><span class="nav-text">Producer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumer"><span class="nav-text">Consumer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Broker"><span class="nav-text">Broker</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
